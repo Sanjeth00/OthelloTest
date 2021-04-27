@@ -28,7 +28,5 @@ public class Othello {
         oBoard[i][i] = oBoard[i+1][i+1] = 'w';
         oBoard[i][i+1] = oBoard[i+1][i] = 'b';
 
-        System.out.println(oBoard);
-
     }
 }
