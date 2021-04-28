@@ -1,5 +1,7 @@
 package inf101.sem2.game;
 
+import inf101.sem2.player.OthelloPlayer;
+
 import java.lang.Character;
 import java.lang.String;
 import java.util.ArrayList;
@@ -212,5 +214,86 @@ public class Othello {
         return newBoard;
     }
 
+    public void playGame(OthelloPlayer p1, OthelloPlayer p2, boolean show) {
+        p1.initialize('b');
+        p2.initialize('w');
+        char currentMove = 'b';
 
+        while (true) {
+            OthelloMove move;
+
+            if (currentMove != 'w') {
+                System.out.println(boardString());
+
+                move = p1.makeMove(this);
+                if (move.noMoves()) {
+                    if (anyLegalMoves(p2.colour)) {
+                        System.out.println(p1.name + "'s (Black) move");
+                        if (move.gameOver()) {
+                            System.out.println(p1.name + " concedes. Game over!\n");
+                            break;
+                        }
+                        else {
+                            System.out.println("No valid moves. " + p1.name + " muss pass.");
+                            currentMove = 'w';
+                        }
+                    }
+                    else {
+                        System.out.println("Game over!\n");
+                        int difference = counter(p1.colour) - counter(p2.colour);
+                        if (difference < 0)
+                            System.out.println(p2.name + " is the winner.");
+                        else System.out.println(p1.name + " is the winner.");
+                        break;
+                    }
+                }
+                else {
+                    System.out.println(p1.name + " 's (Black) move.");
+                    makinMoves(p1.colour, move);
+                    System.out.println(newline);
+                    String moveString = "The move is    " + Integer.toString(move.getRow()) + ", " + Integer.toString(move.getCol());
+                    System.out.println(moveString);
+                    System.out.println(newline);
+                    currentMove = 'w';
+                    continue;
+                }
+            }
+            if (currentMove != 'b') {
+                System.out.println(boardString());
+                move = p2.makeMove(this);
+                if (move.noMoves()) {
+                    if (anyLegalMoves(p1.colour)) {
+                        System.out.println(p2.name + " 's (White) move.");
+                        if (move.gameOver()) {
+                            System.out.println(p1.name + " concedes. Game over!\n");
+                            break;
+                        }
+                        else {
+                            System.out.println("No valid moves." + p2.name + " must pass. ");
+                            currentMove = 'b';
+                        }
+                    }
+                    else {
+                        System.out.println("Game over!\n");
+                        int difference = counter(p1.colour) - counter(p2.colour);
+                        if (difference < 0)
+                            System.out.println(p2.name + " is the winner.");
+                        else
+                            System.out.println(p1.name + " is the winner.");
+                        break;
+                    }
+                }
+                else {
+                    System.out.println(p2.name + " 's (White) move.");
+                    makinMoves(p2.colour, move);
+                    currentMove = 'b';
+                    System.out.println(newline);
+                    String moveString = "The move is " + Integer.toString(move.getRow()) + ", " + Integer.toString(move.getCol());
+                    System.out.println(moveString);
+                    System.out.println(newline);
+                    continue;
+                }
+            }
+        }
+    }
 }

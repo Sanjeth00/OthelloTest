@@ -3,25 +3,25 @@ package inf101.sem2.terminal;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import inf101.sem2.game.Game;
-import inf101.sem2.game.ConnectFour;
-import inf101.sem2.game.TicTacToe;
-import inf101.sem2.player.ConsolePlayer;
-import inf101.sem2.player.DumbPlayer;
-import inf101.sem2.player.Player;
+import inf101.sem2.game.*;
+import inf101.sem2.player.*;
 
 public class TerminalMenu {
 
 	public static Game selectGame(ArrayList<Player> players) {
+
+		OthelloPlayer p1 = new HumanPlayer("Human");
+		OthelloPlayer p2 = new HumanPlayer("Menneske");
+		Scanner scanner = new Scanner(System.in);
+
 		System.out.println("Which game do you wish to play?");
-		System.out.println("Press 1 for TicTacToe and 2 for Connect 4");
+		System.out.println("Press 1 for TicTacToe, 2 for Connect 4 and 3 for Othello");
 		int choice = TerminalInput.readInt(new Scanner(System.in));
 		Game game;
 		switch (choice) {
 			case 1:
 				game = new TicTacToe(new TerminalGraphics(), players.get(0), players.get(1));
 				break;
-
 			case 2:
 				game = new ConnectFour(new TerminalGraphics(), players.get(0), players.get(1));
 				break;
