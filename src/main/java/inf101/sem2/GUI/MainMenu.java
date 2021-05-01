@@ -16,12 +16,9 @@ import javax.swing.JPanel;
 
 import inf101.sem2.game.ConnectFour;
 import inf101.sem2.game.Game;
+import inf101.sem2.game.Othello;
 import inf101.sem2.game.TicTacToe;
-import inf101.sem2.player.GameEndedException;
-import inf101.sem2.player.GuiPlayer;
-import inf101.sem2.player.MiniMaxPlayer;
-import inf101.sem2.player.Player;
-import inf101.sem2.player.RestartException;
+import inf101.sem2.player.*;
 
 /**
  * This class is a Game menu which lets you choose which game to play.
@@ -32,12 +29,14 @@ public class MainMenu implements ActionListener {
 
 	private final JButton playConnectFourButton; //Button to start new 4 in row game
 	private final JButton playTicTacToeButton; //Button to start new TicTacToe game
+	private final JButton playOthelloButton; //Button to start new Othello game
 	private final JFrame frame;
 	public Game game;
 	public GameGUI gui;
 	boolean start;
 
 	public MainMenu() {
+
 		//make new main window for the game
 		frame = new JFrame();
 		frame.setTitle("Game menu");
@@ -49,6 +48,7 @@ public class MainMenu implements ActionListener {
 		//add one button for each game
 		playTicTacToeButton = addButton(buttons, "Tic-Tac-Toe");
 		playConnectFourButton = addButton(buttons, "Connect Four");
+		playOthelloButton = addButton(buttons, "Othello");
 
 		//add buttons to the window
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -81,6 +81,10 @@ public class MainMenu implements ActionListener {
 	//that gets called when buttons are clicked.
 	@Override
 	public void actionPerformed(ActionEvent e) {
+
+		OthelloPlayer p1 = new HumanPlayer("Human");
+		OthelloPlayer p2 = new HumanPlayer("Menneske");
+
 		if(game != null) {
 			System.err.println("Game is in progress, only one game at the time is possible.");
 			return;
@@ -94,6 +98,9 @@ public class MainMenu implements ActionListener {
 		}
 		if(e.getSource() == playTicTacToeButton) {
 			game = new TicTacToe(graphics, players);
+		}
+		if(e.getSource() == playOthelloButton) {
+			System.err.println("Coming out soon to...");
 		}
 		if(game == null) {
 			System.err.println("Button not recognized, no game created.");

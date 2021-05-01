@@ -42,35 +42,6 @@ public class Othello {
         oBoard[i][i+1] = oBoard[i+1][i] = 'b';
     }
 
-    public char posOccupy(int r, int c) {
-        return oBoard[r][c];
-    }
-
-    private boolean validPos(int r, int c) {
-        boolean valid = true;
-        if ((c <= 0 || c > size) || (r <= 0 || r > size))
-            valid = false;
-
-        return valid;
-    }
-
-    private boolean contain(int r, int c, char symbol) {
-        boolean contains = false;
-        if (validPos(r, c)) {
-            if (oBoard[r][c] == Character.toLowerCase(symbol))
-                contains = true;
-        }
-        return contains;
-    }
-
-    public boolean contain(int r ,int c, char symbol, char[][] wBoard) {
-        boolean contains = false;
-        if (validPos(r, c)) {
-            if (wBoard[r][c] == Character.toLowerCase(symbol))
-                contains = true;
-        }
-        return contains;
-    }
 
     public int counter(char symbol) {
         if (Character.isUpperCase(symbol)) {
@@ -87,21 +58,7 @@ public class Othello {
         return count;
     }
 
-    public int frontDisk (char player) {
-        int dirI[] = {-1,1,0,0,1,-1,1,-1};
-        int dirJ[] = {0,0,1,-1,1,-1,-1,1};
-        int sum = 0;
-        for (int i = 1; i <= size; i++)
-            for (int j = 1; j <= size; j ++) {
-                if (oBoard[i][j] == player)
-                    for (int k = 0; k < 8; k++)
-                        if (oBoard[i+dirI[k]][j+dirJ[k]] == player) {
-                            sum++;
-                            break;
-                        }
-                }
-        return sum;
-    }
+
 
     public char enemy(char player) {
         if (player == 'b')
@@ -193,18 +150,6 @@ public class Othello {
         return result;
     }
 
-    public ArrayList<OthelloMove> generatesMoves(char player) {
-        ArrayList<OthelloMove> possibleMoves = new ArrayList<OthelloMove>();
-        for (int i = 1; i <= size; i++) {
-            for (int j = 1; j <= size; j++) {
-                if (legalMove(player,i,j)) {
-                    OthelloMove aMove = new OthelloMove(i,j);
-                    possibleMoves.add(aMove);
-                }
-            }
-        }
-        return possibleMoves;
-    }
 
     public char[][] getBoardCopy() {
         char newBoard[][] = new char[size+2][size+2];
