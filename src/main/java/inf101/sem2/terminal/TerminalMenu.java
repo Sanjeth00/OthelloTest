@@ -14,6 +14,7 @@ public class TerminalMenu {
 		OthelloPlayer p2 = new HumanPlayer("Menneske");
 		Scanner scanner = new Scanner(System.in);
 
+
 		System.out.println("Which game do you wish to play?");
 		System.out.println("Press 1 for TicTacToe, 2 for Connect 4 and 3 for Othello");
 		int choice = TerminalInput.readInt(new Scanner(System.in));
@@ -25,6 +26,9 @@ public class TerminalMenu {
 			case 2:
 				game = new ConnectFour(new TerminalGraphics(), players.get(0), players.get(1));
 				break;
+			case 3:
+				Othello play = new Othello();
+				play.playGame(p1,p2, true);
 			default:
 				throw new IllegalArgumentException("Unexpected value: " + choice);
 		}

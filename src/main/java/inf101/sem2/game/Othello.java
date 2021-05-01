@@ -148,7 +148,7 @@ public class Othello {
     }
 
     public boolean legalMove(char player, int r, int c) {
-        if (oBoard[r][c] == '.') {
+        if(oBoard[r][c] == '.') {
             for (int k = 0; k < 8; k++)
                 if (wFlip(player,r,c,k)) {
                     return true;
@@ -159,7 +159,7 @@ public class Othello {
 
     public boolean anyLegalMoves(char player) {
         for (int i = 1; i <= size; i++)
-            for (int j = 1; i <= size; j++)
+            for (int j = 1; j <= size; j++)
                 if (legalMove(player,i,j))
                     return true;
         return false;

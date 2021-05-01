@@ -22,9 +22,9 @@ public class HumanPlayer extends OthelloPlayer {
         OthelloMove humanMove = null;
         Scanner scanner = new Scanner(System.in);
         int col, row;
-        if(game.anyLegalMoves(colour) == false) {
+        if(!game.anyLegalMoves(colour)) {
             OthelloMove noMove = new OthelloMove(0,0);
-            noMove.noMoves();
+            noMove.noLegalmoves();
             System.out.println("Here!! no valid moves!\n");
             return noMove;
         }
